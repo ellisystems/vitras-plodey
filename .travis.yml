@@ -1,0 +1,16 @@
+dist: xenial
+language: node_js
+node_js:
+  - "11"
+before_install:
+- nvm install-latest-npm
+- npm install yaml-lint
+sudo: required
+install: make hello
+script: make before
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: make run ENVIRONMENT=dev
+  on:
+    branch: deploy-dev
